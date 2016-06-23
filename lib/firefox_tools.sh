@@ -42,6 +42,10 @@ else
     PROFILES_DIRECTORY="${HOME}/.mozilla/firefox"
 fi
 
+PROJECTS_ROOT=$(shyaml get-value projects-root < "${CONFIG}" 2> /dev/null) || PROJECTS_ROOT="${HOME}/src"
+PROJECTS_ROOT=$(python3 -c "from os.path import expanduser; print(expanduser('${PROJECTS_ROOT}'))")
+export PROJECTS_ROOT
+
 PROFILE=$(sed -n -e 's/^.*Path=//p' < "${PROFILES_DIRECTORY}/profiles.ini" | head -n 1)
 PROFILE_DIRECTORY="${PROFILES_DIRECTORY}/${PROFILE}"
 export PROFILE_DIRECTORY

@@ -7,7 +7,7 @@ This section explains how to use this project.
 Run the main entry point program.
 
 ```sh
-bin/ft
+PYTHONPATH=. bin/ft
 ```
 
 Show help for NSS tools.
@@ -17,7 +17,7 @@ certutil -H
 pk12util -H
 ```
 
-Import a certificate.
+Import a set of certificates.
 
 ```sh
 bin/import-certificate.sh /etc/ssl/certs/example.org.authority-certificate.pem
@@ -26,24 +26,51 @@ bin/import-certificate.sh /etc/ssl/certs/example-service.example-system.example.
 ```
 
 
+## Setup
+
+This section explains how to install and uninstall this project.
+
+Install the project.
+
+```sh
+pip3 install git+https://git@github.com/FunTimeCoding/firefox-tools.git#egg=firefox-tools
+```
+
+Uninstall the project.
+
+```sh
+pip3 uninstall firefox-tools
+```
+
+
 ## Development
 
-This section explains how to use scripts that are intended to ease the development of this project.
+This section explains commands to help the development of this project.
 
-Install development tools.
+Install the project from a local clone.
 
 ```sh
-sudo apt-get install shellcheck
+./development-setup.sh
 ```
 
-Run style check and show all concerns.
+Run tests, style check and metrics.
 
 ```sh
+./run-tests.sh
 ./run-style-check.sh
+./run-metrics.sh
 ```
 
-Build the project like Jenkins.
+Build the project.
 
 ```sh
 ./build.sh
 ```
+
+
+## Skeleton
+
+This section explains details of the project skeleton.
+
+- The `tests` directory is not called `test` because there is a package with that name.
+- Dashes in project names become underscores in Python.

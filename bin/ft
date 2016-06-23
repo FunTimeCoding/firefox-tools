@@ -1,13 +1,15 @@
-#!/bin/sh -e
+#!/usr/bin/env python3
 
-DIRECTORY=$(dirname "${0}")
-SCRIPT_DIRECTORY=$(cd "${DIRECTORY}" || exit 1; pwd)
+from sys import argv as argument_vector, exit as system_exit
 
-usage()
-{
-    echo "Usage: ${0}"
-}
+from firefox_tools.firefox_tools import FirefoxTools
 
-# shellcheck source=/dev/null
-. "${SCRIPT_DIRECTORY}/../lib/firefox_tools.sh"
-echo "Hello friend."
+
+def main():
+    application = FirefoxTools(argument_vector[1:])
+    exit_code = application.run()
+    system_exit(exit_code)
+
+
+if __name__ == '__main__':
+    main()
