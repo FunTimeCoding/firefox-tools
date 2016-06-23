@@ -1,7 +1,16 @@
 #!/bin/sh -e
 
-CONFIG=""
-VERBOSE=false
+if [ "$(command -v shyaml || true)" = "" ]; then
+    echo "Command not found: shyaml"
+
+    exit 1
+fi
+
+if [ "$(command -v realpath || true)" = "" ]; then
+    echo "Command not found: realpath"
+
+    exit 1
+fi
 
 function_exists()
 {
@@ -9,6 +18,8 @@ function_exists()
 
     return $?
 }
+
+CONFIG="${HOME}/.firefox-tools.yml"
 
 while true; do
     case ${1} in
@@ -32,8 +43,16 @@ while true; do
 done
 
 OPTIND=1
-export CONFIG
-export VERBOSE
+
+if [ -f "${CONFIG}" ]; then
+    CONFIG=$(realpath "${CONFIG}")
+else
+    CONFIG=""
+fi
+
+PROJECTS_ROOT=$(shyaml get-value projects-root < "${CONFIG}" 2> /dev/null) || PROJECTS_ROOT="${HOME}/src"
+PROJECTS_ROOT=$(python3 -c "from os.path import expanduser; print(expanduser('${PROJECTS_ROOT}'))")
+export PROJECTS_ROOT
 OPERATING_SYSTEM=$(uname)
 
 if [ "${OPERATING_SYSTEM}" = Darwin ]; then
@@ -41,10 +60,6 @@ if [ "${OPERATING_SYSTEM}" = Darwin ]; then
 else
     PROFILES_DIRECTORY="${HOME}/.mozilla/firefox"
 fi
-
-PROJECTS_ROOT=$(shyaml get-value projects-root < "${CONFIG}" 2> /dev/null) || PROJECTS_ROOT="${HOME}/src"
-PROJECTS_ROOT=$(python3 -c "from os.path import expanduser; print(expanduser('${PROJECTS_ROOT}'))")
-export PROJECTS_ROOT
 
 PROFILE=$(sed -n -e 's/^.*Path=//p' < "${PROFILES_DIRECTORY}/profiles.ini" | head -n 1)
 PROFILE_DIRECTORY="${PROFILES_DIRECTORY}/${PROFILE}"

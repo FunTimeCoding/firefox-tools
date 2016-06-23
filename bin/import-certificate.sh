@@ -26,7 +26,7 @@ if [ "${CERTIFICATE}" = "" ]; then
     exit 1
 fi
 
-CERTIFICATE_NAME=$(~/Code/Personal/transport-layer-security-tools/bin/show-certificate-information.sh "${CERTIFICATE}" | grep DNSname  || true)
+CERTIFICATE_NAME=$("${PROJECTS_ROOT}"/transport-layer-security-tools/bin/show-certificate-information.sh "${CERTIFICATE}" | grep DNSname || true)
 CERTIFICATE_NAME=$(echo "${CERTIFICATE_NAME#*DNSname: }" | xargs)
 
 if [ "${CERTIFICATE_NAME}" = "" ]; then

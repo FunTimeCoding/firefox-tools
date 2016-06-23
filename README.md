@@ -36,6 +36,12 @@ Install the project.
 pip3 install git+https://git@github.com/FunTimeCoding/firefox-tools.git#egg=firefox-tools
 ```
 
+Copy the example config file.
+
+```sh
+cp example-config.yml ~/.firefox-tools.yml
+```
+
 Uninstall the project.
 
 ```sh
