@@ -1,9 +1,10 @@
-pep8 # style check
+pycodestyle # style check
 pylint # style check
 flake8 # style check
 pyenchant # pylint spell check plugin
 pytest # test framework
 pytest-cov # pytest coverage plugin
+mccabe # static analysis
 shyaml # YAML parser for shell scripts
 
 # helper classes
