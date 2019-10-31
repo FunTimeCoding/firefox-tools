@@ -1,6 +1,10 @@
-shellcheck
 OPTIND
+mkdir
+tmp
+uname
 sudo
+uniq
+sshd
 netmask
 nameservers
 DHCP
@@ -9,5 +13,4 @@ cpio
 libenchant
 hunspell
 wget
-mkdir
 myspell

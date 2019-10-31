@@ -25,7 +25,7 @@ setup(
     ],
     keywords='development project skeleton',
     packages=['firefox_tools'],
-    install_requires=[],
+    install_requires=['pyyaml'],
     python_requires='>=3.2',
     entry_points={
         'console_scripts': [

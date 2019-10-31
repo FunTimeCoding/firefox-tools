@@ -5,7 +5,5 @@ pyenchant # pylint spell check plugin
 pytest # test framework
 pytest-cov # pytest coverage plugin
 mccabe # static analysis
+pyyaml # YAML parser
 shyaml # YAML parser for shell scripts
-
-# helper classes
-git+https://git@github.com/FunTimeCoding/python-utility.git#egg=python-utility
